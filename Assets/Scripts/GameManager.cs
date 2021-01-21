@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] Button[] button;
-    [Header("Color Order")]
-    [SerializeField] List<int> colorOrder;
+    [SerializeField] PlayMenu playMenu;
     [SerializeField] float pickDelay = .4f;
     [SerializeField] int pickNumber = 0;
     [SerializeField] Score score;
-    
+    [SerializeField] Button[] button;
+
+    [Header("Color Order")]
+    [SerializeField] List<int> colorOrder;
         
 
 
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
     {
         ResetGame();
         SetButtonIndex();
-        StartCoroutine("PlayGame");
+       // StartCoroutine("PlayGame");
                       
     }
 
@@ -31,6 +32,11 @@ public class GameManager : MonoBehaviour
         {
             button[count].ButtonIndex = count;
         }
+    }
+
+    public void StartGame()
+    {
+        StartCoroutine("PlayGame");
     }
 
     IEnumerator PlayGame()
@@ -78,7 +84,9 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Wrong");
             ResetGame();
-            StartCoroutine("PlayGame");
+
+            playMenu.Activate();
+          //  StartCoroutine("PlayGame");
         }
         
     }
